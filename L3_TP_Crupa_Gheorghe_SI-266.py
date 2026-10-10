@@ -6,7 +6,7 @@
 
    Universitatea Tehnica a Moldovei
    Facultatea Calculatoare, Informatica si Microelectronica
-   Disciplina: Tehnici de programare        Anul I, grupele SI-265 / SI-266
+   Disciplina: Tehnici de programare        Anul I, grupa SI-266
 
 ===============================================================================
 
@@ -65,9 +65,9 @@
 #   DATELE TALE  -  completeaza-le inainte de orice altceva
 # ============================================================================
 
-NUME = ""        # numele de familie, de exemplu "Popescu"
-PRENUME = ""     # prenumele, de exemplu "Ion"
-GRUPA = ""       # grupa exact asa: "SI-265" sau "SI-266"
+NUME = "Crupa"        # numele de familie, de exemplu "Popescu"
+PRENUME = "Gheorghe"     # prenumele, de exemplu "Ion"
+GRUPA = "SI-266"       # grupa exact asa: "SI-265" sau "SI-266"
 
 
 
@@ -83,6 +83,8 @@ GRUPA = ""       # grupa exact asa: "SI-265" sau "SI-266"
 # final. Nu folosi print, pentru că verificarea se uită doar la valoarea
 # returnată.
 def saluta():
+    return "Hello, World!" 
+
     # Returneaza exact textul:  Hello, World!
     pass
 
@@ -93,6 +95,8 @@ def saluta():
 # F = C * 9/5 + 32 și să returneze rezultatul. Nu rotunji și nu afișa
 # nimic: doar returnează numărul obținut.
 def celsius_in_fahrenheit(c):
+    return c * 9/5 + 32  
+
     # Returneaza temperatura in Fahrenheit.  F = C * 9/5 + 32
     pass
 
@@ -104,6 +108,8 @@ def celsius_in_fahrenheit(c):
 # elementele ei, tot în ordine descrescătoare. Lista primită nu trebuie
 # stricată.
 def cele_mai_mari_trei(numere):
+    return sorted(numere, reverse=True)[:3]
+
     # Returneaza o lista cu cele mai mari trei numere, descrescator.
     # Daca lista are mai putin de trei elemente, le returneaza pe toate.
     pass
@@ -115,6 +121,8 @@ def cele_mai_mari_trei(numere):
 # împărțiri. De exemplu, cat_si_rest(17, 5) trebuie să dea (3, 2).
 # Returnează amândouă valorile dintr-un singur return.
 def cat_si_rest(a, b):
+    return (a // b, a % b)
+
     # Returneaza un tuplu: (catul impartirii intregi, restul)
     # Exemplu: cat_si_rest(17, 5) da (3, 2)
     pass
@@ -127,6 +135,8 @@ def cat_si_rest(a, b):
 # urmează spațiu, cratimă, spațiu, cuvântul media și valoarea scrisă cu
 # exact două zecimale.
 def fisa_student(nume, grupa, media):
+    return f"{nume} ({grupa}) - media {media:.2f}"
+
     # Returneaza exact:  Popescu Ion (SI-266) - media 8.50
     # Media se scrie cu exact doua zecimale.
     pass
@@ -139,6 +149,12 @@ def fisa_student(nume, grupa, media):
 # spații în plus la început sau la final, deci curăță-l mai întâi.
 # Funcția returnează un șir de caractere; nu îl afișa cu print.
 def initiale(nume_complet):
+    cuvinte = nume_complet.strip().split()
+    rezultat = ""
+    for cuv in cuvinte:
+        rezultat += cuv[0].upper() + "."
+    return rezultat
+
     # Returneaza initialele cu majuscule, fiecare urmata de punct.
     # Exemplu: initiale("popescu ion") da "P.I."
     pass
@@ -152,6 +168,15 @@ def initiale(nume_complet):
 # diacritice, altfel verificarea nu le recunoaște. Funcția returnează
 # textul, nu îl afișează.
 def calificativ(nota):
+    if nota >= 9:
+        return "excelent"
+    elif nota >= 7:
+        return "bine"
+    elif nota >= 5:
+        return "satisfacator"
+    else:
+        return "nepromovat"
+    
     # 9-10 -> "excelent",  7-8 -> "bine",
     # 5-6  -> "satisfacator",  sub 5 -> "nepromovat"
     pass
@@ -166,9 +191,17 @@ def calificativ(nota):
 # Pentru n = 5 rezultatul este ["1", "2", "Fizz", "4", "Buzz"].
 # Returnezi lista întreagă, nu afișezi nimic.
 def fizzbuzz(n):
-    # Returneaza o lista cu n elemente, pentru numerele de la 1 la n.
-    # Exemplu pentru n=5:  ["1", "2", "Fizz", "4", "Buzz"]
-    pass
+    rezultat = []
+    for i in range(1, n + 1):
+        if i % 3 == 0 and i % 5 == 0:
+            rezultat.append("FizzBuzz")
+        elif i % 3 == 0:
+            rezultat.append("Fizz")
+        elif i % 5 == 0:
+            rezultat.append("Buzz")
+        else:
+            rezultat.append(str(i))
+    return rezultat
 
 # --- Sarcina 9: Funcții proprii ---------------------------------------------
 # Scrie funcția pret_final(pret, reducere=0). Ea primește un preț și un
@@ -179,6 +212,8 @@ def fizzbuzz(n):
 # De exemplu, pret_final(200, 25) întoarce 150.0, iar pret_final(80)
 # întoarce 80.0.
 def pret_final(pret, reducere=0):
+    return round(pret - (pret * reducere / 100), 2)
+
     # Returneaza pretul dupa reducere, rotunjit la doua zecimale.
     # Exemplu: pret_final(200, 25) da 150.0
     pass
@@ -191,14 +226,24 @@ def pret_final(pret, reducere=0):
 # două zecimale; dacă studentul nu are nicio notă, returnează 0.
 class Student:
     def __init__(self, nume, grupa):
+        self.nume = nume
+        self.grupa = grupa
+        self.note = []
+
         # Retine numele, grupa si o lista goala de note.
         pass
 
     def adauga_nota(self, nota):
+        self.note.append(nota)
+
         # Adauga nota in lista de note.
         pass
 
     def media(self):
+        if len(self.note) == 0:
+            return 0
+        return round(sum(self.note) / len(self.note), 2)
+
         # Media notelor, rotunjita la doua zecimale.
         # Daca nu are nicio nota, returneaza 0.
         pass
@@ -211,6 +256,13 @@ class Student:
 # De exemplu, frecventa_litere("Ana are") dă {"a": 3, "n": 1, "r": 1,
 # "e": 1}. Rezultatul se returnează, nu se afișează.
 def frecventa_litere(text):
+    rezultat = {}
+    for c in text:
+        if c.isalpha():
+            c = c.lower()
+            rezultat[c] = rezultat.get(c, 0) + 1
+    return rezultat
+
     # Returneaza un dictionar litera -> de cate ori apare.
     # Se numara doar literele, cu litera mica.
     # Exemplu: frecventa_litere("Ana are") da {"a": 3, "n": 1, "r": 1, "e": 1}
@@ -222,7 +274,12 @@ def frecventa_litere(text):
 # Funcția returnează câte zile sunt între cele două date, ca număr întreg
 # și întotdeauna pozitiv, indiferent care dată a fost dată prima. Trebuie
 # să folosești modulul datetime, nu să calculezi tu zilele.
+from datetime import datetime
 def zile_intre(data1, data2):
+    d1 = datetime.strptime(data1, "%Y-%m-%d")
+    d2 = datetime.strptime(data2, "%Y-%m-%d")
+    return abs((d2 - d1).days)
+
     # Numarul de zile intre doua date scrise ca "2026-09-22".
     # Intotdeauna pozitiv. Foloseste modulul datetime.
     pass
@@ -235,6 +292,18 @@ def zile_intre(data1, data2):
 # De exemplu, salveaza_si_incarca("note.txt", [8, 9.5]) returnează
 # lista [8.0, 9.5].
 def salveaza_si_incarca(cale, note):
+    with open(cale, "w") as f:
+        for nota in note:
+            f.write(str(nota) + "\n")
+            
+    rezultat = []
+    with open(cale, "r") as f:
+        pentru_randuri = f.readlines()
+        for rand in pentru_randuri:
+            if rand.strip():
+                rezultat.append(float(rand.strip()))
+    return rezultat
+
     # Scrie notele in fisier, cate una pe rand, apoi citeste fisierul
     # inapoi si returneaza lista de note ca numere float.
     # Exemplu: salveaza_si_incarca("note.txt", [8, 9.5]) da [8.0, 9.5]
@@ -253,37 +322,84 @@ def salveaza_si_incarca(cale, note):
 # --- Misiunea 1 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 1.
 def misiunea_1(player):
+    for _ in range(5):
+        player.move_forward()
     pass
 
 # --- Misiunea 2 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 2.
 def misiunea_2(player):
+    for _ in range(3):
+        player.move_forward()
+    player.turn_right()
+    for _ in range(2):
+        player.move_forward()
     pass
 
 # --- Misiunea 3 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 3.
 def misiunea_3(player):
+    for _ in range(15):
+        player.move_forward()
     pass
 
 # --- Misiunea 4 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 4.
 def misiunea_4(player):
+    player.move_forward()
+    for _ in range(3):
+        player.move_forward()
+        player.collect()
+        player.move_forward()
     pass
 
 # --- Misiunea 5 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 5.
 def misiunea_5(player):
+    player.move_forward()
+    player.move_forward()
+    player.push()
+    for _ in range(6):
+        player.move_forward()
     pass
 
 # --- Misiunea 6 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 6.
 def misiunea_6(player):
+    player.move_forward()
+    for _ in range(4):
+        player.move_forward()
+        player.collect()
+    player.move_forward()
+    player.build("bridge")
+    for _ in range(4):
+        player.move_forward()
     pass
 
 # --- Misiunea 7 ------------------------------------------------------------
 # Obiectivul il vezi in program, la Partea 2, misiunea 7.
 def misiunea_7(player):
-    pass
+    player.move_forward()
+    player.move_forward()
+    player.push()
+    for _ in range(2):
+        player.move_forward()
+    for _ in range(3):
+        player.move_forward()
+        player.collect()
+    player.move_forward()
+    player.turn_right()
+    for _ in range(2):
+        player.move_forward()
+    player.build("bridge")
+    for _ in range(2):
+        player.move_forward()
+    player.turn_right()
+    for _ in range(2):
+        player.move_forward()
+    player.collect()
+    player.move_forward()
+    player.move_forward()
 
 
 
@@ -299,6 +415,8 @@ def misiunea_7(player):
 # comprehension, nu un ciclu for clasic. Funcția dă lista înapoi cu
 # return, nu o afișează cu print.
 def patrate_pare(n):
+    return [x * x for x in range(1, n + 1) if x % 2 == 0]
+
     # Lista patratelor numerelor PARE de la 1 la n inclusiv.
     # Exemplu: patrate_pare(6) da [4, 16, 36]
     # Foloseste o list comprehension.
@@ -312,6 +430,8 @@ def patrate_pare(n):
 # ("Bogdan", 9)]) returnează [("Bogdan", 9), ("Ana", 7)]. Lista primită
 # rămâne neatinsă, iar rezultatul se dă cu return.
 def sorteaza_dupa_nota(studenti):
+    return sorted(studenti, key=lambda p: (-p[1], p[0]))
+
     # Lista de tupluri (nume, nota), sortata descrescator dupa nota.
     # La note egale, ordine alfabetica dupa nume.
     pass
@@ -323,6 +443,11 @@ def sorteaza_dupa_nota(studenti):
 # returnează tot None. Funcția nu are voie să se oprească niciodată cu
 # eroare, oricare ar fi argumentele primite.
 def imparte_sigur(a, b):
+    try:
+        return a / b
+    except (ZeroDivisionError, TypeError):
+        return None
+    
     # Returneaza a / b. Daca b este 0 sau datele nu sunt numere,
     # returneaza None. Functia nu are voie sa se opreasca cu eroare.
     pass
@@ -334,6 +459,8 @@ def imparte_sigur(a, b):
 # elemente_comune([1, 2, 2, 3], [2, 3, 4]) trebuie să dea [2, 3].
 # Funcția returnează rezultatul cu return, nu îl afișează cu print.
 def elemente_comune(a, b):
+    return sorted(set(a) & set(b))
+
     # Lista sortata crescator cu valorile din ambele liste, fara duplicate.
     # Exemplu: elemente_comune([1, 2, 2, 3], [2, 3, 4]) da [2, 3]
     pass
@@ -345,6 +472,8 @@ def elemente_comune(a, b):
 # folosești filter, iar map sau sum sunt opționale. De exemplu,
 # total_peste_prag([10, 50, 100], 20) trebuie să dea 150.0.
 def total_peste_prag(preturi, prag):
+    return round(float(sum(filter(lambda x: x > prag, preturi))), 2)
+
     # Suma preturilor STRICT mai mari decat prag, rotunjita la 2 zecimale.
     # Exemplu: total_peste_prag([10, 50, 100], 20) da 150.0
     # Foloseste filter.
@@ -357,7 +486,9 @@ def total_peste_prag(preturi, prag):
 # exact trei cifre, de exemplu SI-266. Pentru textul
 # "Grupele SI-265 si FI-101 vin azi" funcția trebuie să dea
 # ["SI-265", "FI-101"].
+import re
 def extrage_grupe(text):
+    return re.findall(r"[A-Z]{2}-\d{3}", text)
     # Lista codurilor de grupa gasite in text, in ordinea aparitiei.
     # Un cod are doua litere mari, cratima, exact trei cifre: SI-266
     # Foloseste modulul re.
